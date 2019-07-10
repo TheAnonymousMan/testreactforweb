@@ -42,7 +42,7 @@ class App extends React.Component
   // This method fetches the data from the back.
   getDataFromDb = () =>
   {
-    fetch('http://localhost:8080/api/getData')
+    fetch('http://85.187.132.94:8080/api/getData')
       .then((data) => data.json())
       .then((res) => this.setState({data: res.data}));
   }
@@ -62,8 +62,9 @@ class App extends React.Component
     };
     console.log(data.id + data.name);
     console.log(" post " + idToBeAdded +" "+name);
-    axios.post('http://localhost:8080/api/postData',data);
+    axios.post('http://85.187.132.94:8080/api/postData',data);
   }
+  
   // This method sends the id to be deleted to the back.
   deleteFromDb = (idToDelete) =>
   {
@@ -80,7 +81,7 @@ class App extends React.Component
     });
 
     console.log(" delete "+idToDelete+" "+objIdToDelete);
-    axios.delete(`http://localhost:8080/api/deleteData/${objIdToDelete}`)
+    axios.delete(`http://85.187.132.94:8080/api/deleteData/${objIdToDelete}`)
     .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -105,10 +106,22 @@ class App extends React.Component
     });
 
     console.log(" update "+idToUpdate+" objIdToUpdate "+objIdToUpdate);
-    axios.post('http://localhost:8080/api/updateData',{
+    axios.post('http://85.187.132.94:8080/api/updateData',{
       id: objIdToUpdate,
       update: {name: updateToApply}
     });
+  }
+
+  // Facebook login response manager
+  facebookResponse = (response) =>
+  {
+    console.log(response);
+  }
+
+  // Google login response manager
+  googleResponse = (response) =>
+  {
+    console.log(response);
   }
 
   render()
@@ -186,9 +199,10 @@ class App extends React.Component
             UPDATE
           </button>
         </div>
-      </div>
+    </div>
     )
   }
 }
 
 export default App;
+
